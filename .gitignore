@@ -1,0 +1,23 @@
+# Local Terraform directories
+**/.terraform/*
+.terraform/
+# Terraform state files
+*.tfstate
+*.tfstate.*
+# Backup files
+*.tfstate.backup
+# Variables files (if sensitive)
+*.tfvars
+# Plan files
+*.tfplan
+# Crash logs
+crash.log
+# Terraform workspace files
+.terraform.tfstate.d/
+# Ignore IDE specific files
+.idea/
+.vscode/
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
