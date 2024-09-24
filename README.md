@@ -22,3 +22,11 @@ be created:
 - A security group will be created and Port 22 and 80 will be allowed
 - User data script will be passed to install nginx and a simple HTML sentence
 - Terraform will output the VPC, subnet details and public IP of instance
+
+Screenshots:
+![DevOutput](screenshots/DevOutput.png)
+![DevRunning](screenshots/DevRunning.png)
+![HelloDev](screenshots/hellofromDev.png)
+![HelloProd](screenshots/HelloFromProd.png)
+![HelloStaging](screenshots/HelloFromStaging.png)
+![ProdAWS](screenshots/ProdAWS.png)
