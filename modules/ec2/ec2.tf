@@ -34,17 +34,14 @@ data "aws_key_pair" "existing" {
 }
 
 resource "aws_key_pair" "aws_key_pair" {
-  count      = data.aws_key_pair.existing.key_pair_id == null ? 1 : 0
-  key_name   = "TerraformKeyPair"
+  count      = var.key_pair_exists ? 0 : 1
+  #key_name   = "TerraformKeyPair"
   public_key = file(var.public_key)
+  lifecycle {
+    ignore_changes = [public_key]
+  }
 }
-# resource "aws_key_pair" "aws_key_pair" {
-#   key_name   = "TerraformKeyPair"
-#   public_key = file(var.public_key)
-#   lifecycle {
-#     ignore_changes = [public_key]
-#   }
-# }
+
 
 resource "aws_security_group" "TerraformSecurityGroup" {
   name = "TerraformSecurityGroup"
@@ -74,7 +71,7 @@ resource "aws_instance" "ec2_instance" {
   instance_type = var.instance_type
   subnet_id     = var.subnet_id
   #key_name = aws_key_pair.aws_key_pair.key_name
-  key_name = try(data.aws_key_pair.existing.key_name, aws_key_pair.aws_key_pair[0].key_name)
+  key_name = var.key_pair_exists ? "TerraformKeyPair" : aws_key_pair.aws_key_pair[0].key_name
   
   security_groups = [aws_security_group.TerraformSecurityGroup.id]
   associate_public_ip_address = contains(var.public_subnets, var.subnet_id) ? true : false
