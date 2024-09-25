@@ -22,16 +22,6 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-data "aws_key_pair" "existing" {
-  key_name = "TerraformKeyPair"
-  # This allows the data source to return null instead of erroring
-  lifecycle {
-    postcondition {
-      condition     = self.key_pair_id != null
-      error_message = "Key pair not found, but this is okay."
-    }
-  }
-}
 
 resource "aws_key_pair" "aws_key_pair" {
   count      = var.key_pair_exists ? 0 : 1
