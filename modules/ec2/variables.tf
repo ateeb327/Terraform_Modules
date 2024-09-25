@@ -39,3 +39,9 @@ variable "public_subnets" {
 variable "vpc_id" {
   type    = string
 }
+
+variable "key_pair_exists" {
+  description = "Flag to determine if the key pair already exists"
+  type        = bool
+  default     = false
+}
